@@ -88,4 +88,20 @@ public class DataVisualisation {
         }
         return severityMap;
     }
+    public static HashMap<String, Integer> productSpecificSeverityCounter(ProductHandler productHandler, String severity) {
+        HashMap<String, Integer> severityMap = new HashMap<>();
+        for (Product product : productHandler.getProducts()) {
+            for (Page page : product.getPages()) {
+                for (Issue issue : page.getIssues()) {
+                    if (issue.getSeverity().equals(severity)) {
+                        severityMap.merge(product.getProductName(), 1, Integer::sum);
+                    }
+
+                }
+            }
+        }
+        return severityMap;
+    }
+
+
 }

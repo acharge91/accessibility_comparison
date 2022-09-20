@@ -97,11 +97,14 @@ public class ExcelGui extends JFrame {
         productIssueSeverityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<String, HashMap<String, Integer>> productSeverityMap = DataVisualisation.productSeverityCounter(productHandler2);
-                DataChart.productSeverityGraph(productSeverityMap);
+                HashMap<String, Integer> product1SeverityMap = DataVisualisation.productSpecificSeverityCounter(productHandler1, "critical");
+                HashMap<String, Integer> product2SeverityMap = DataVisualisation.productSpecificSeverityCounter(productHandler2, "critical");
+                DataChart.productSeverityComparisonGraph(product1SeverityMap, product2SeverityMap, "critical");
             }
         });
     }
+
+
 
 }
 

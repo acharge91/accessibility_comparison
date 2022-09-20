@@ -32,4 +32,6 @@ public class Issue {
     public String getSeverity() {
         return severity;
     }
+
+
 }

@@ -153,6 +153,43 @@ public class DataChart {
         }
     }
 
+    public static void productSeverityComparisonGraph(HashMap<String, Integer> product1SeverityMap, HashMap<String, Integer> product2SeverityMap, String severityLevel){
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (Map.Entry<String, Integer> entry : product2SeverityMap.entrySet()) {
+            String product2Name = entry.getKey();
+            int product2SeverityCount = entry.getValue();
+            if (product1SeverityMap.containsKey(product2Name)) {
+                String product1Name = product2Name;
+
+                dataset.addValue(product1SeverityMap.get(product1Name), "Document 1", product1Name);
+                dataset.addValue(product2SeverityCount, "Document 2", product2Name);
+
+            }
+
+        }
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Product Issue " + severityLevel + " Severity Levels",
+                "No. of " + severityLevel + " Level Issues",
+                 "Document 1 vs Document 2 " + severityLevel + " Issues",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        try {
+            ChartUtilities.saveChartAsJPEG(
+                    new File(fileSaveDirectory + "product_severity_levels_comparison" + fileExtension),
+                    chart,
+                    2000,
+                    800
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void productIssuesGraph(ProductHandler productHandler) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String productName = "";
@@ -246,4 +283,6 @@ public class DataChart {
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
         singleProductPieChart(newIssuesData, product, pieDataSet, "new_issues");
     }
+
+
 }
