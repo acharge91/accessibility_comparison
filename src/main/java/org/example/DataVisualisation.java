@@ -1,11 +1,12 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataVisualisation {
 
-    public static HashMap<String, HashMap<Issue, Integer>> totalFixedIssues(ProductHandler productHandler1, ProductHandler productHandler2) {
+    public static HashMap<String, HashMap<Issue, Integer>> totalFixedIssues(
+            ProductHandler productHandler1, ProductHandler productHandler2
+    ) {
         HashMap<String, HashMap<Issue, Integer>> productFixedIssuesMap = new HashMap<>();
         for (Product product1 : productHandler1.getProducts()) {
             Product product2 = productHandler2.findProduct(product1.getProductName());
@@ -14,7 +15,9 @@ public class DataVisualisation {
                     if (product2.findPage(page.getName()) != null) {
                         HashMap<Issue, Integer> fixedIssuesMap = fixedIssues(page, product2.findPage(page.getName()));
                         if (!fixedIssuesMap.isEmpty() && productFixedIssuesMap.containsKey(product2.getProductName())) {
-                            fixedIssuesMap.forEach((key, value) -> productFixedIssuesMap.get(product2.getProductName()).merge(key, value, Integer::sum));
+                            fixedIssuesMap.forEach((key, value) -> productFixedIssuesMap
+                                    .get(product2.getProductName())
+                                    .merge(key, value, Integer::sum));
                         } else if (!fixedIssuesMap.isEmpty() && !productFixedIssuesMap.containsKey(product2.productName)) {
                             productFixedIssuesMap.put(product2.getProductName(), fixedIssuesMap);
                         }
@@ -25,7 +28,9 @@ public class DataVisualisation {
         return productFixedIssuesMap;
     }
 
-    public static HashMap<String, HashMap<Issue, Integer>> totalNewIssues(ProductHandler productHandler1, ProductHandler productHandler2) {
+    public static HashMap<String, HashMap<Issue, Integer>> totalNewIssues(
+            ProductHandler productHandler1, ProductHandler productHandler2
+    ) {
         HashMap<String, HashMap<Issue, Integer>> productNewIssuesMap = new HashMap<>();
         for (Product product1 : productHandler1.getProducts()) {
             Product product2 = productHandler2.findProduct(product1.getProductName());
@@ -34,7 +39,9 @@ public class DataVisualisation {
                     if (product2.findPage(page.getName()) != null) {
                         HashMap<Issue, Integer> newIssuesMap = newIssues(page, product2.findPage(page.getName()));
                         if (!newIssuesMap.isEmpty() && productNewIssuesMap.containsKey(product1.productName)) {
-                            newIssuesMap.forEach((key, value) -> productNewIssuesMap.get(product1.productName).merge(key, value, Integer::sum));
+                            newIssuesMap.forEach((key, value) -> productNewIssuesMap
+                                    .get(product1.productName)
+                                    .merge(key, value, Integer::sum));
                         } else if (!newIssuesMap.isEmpty() && !productNewIssuesMap.containsKey(product1.getProductName())) {
                             productNewIssuesMap.put(product1.getProductName(), newIssuesMap);
                         }

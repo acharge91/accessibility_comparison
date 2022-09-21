@@ -1,6 +1,5 @@
 package org.example;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -18,7 +17,9 @@ public class DataChart {
     private static String fileSaveDirectory = "/Users/acharge/Downloads/";
     private static String fileExtension = ".jpeg";
 
-    private static void singlePagePieChart(HashMap<Issue, Integer> hashMapData, Page page, DefaultPieDataset pieDataSet, String issueStatus) {
+    private static void singlePagePieChart(
+            HashMap<Issue, Integer> hashMapData, Page page, DefaultPieDataset pieDataSet, String issueStatus
+    ) {
         for (Map.Entry<Issue, Integer> entry : hashMapData.entrySet()) {
             String issue = entry.getKey().getIssue();
             Integer count = entry.getValue();
@@ -45,7 +46,9 @@ public class DataChart {
         }
     }
 
-    private static void singleProductPieChart(HashMap<Issue, Integer> hashMapData, Product product, DefaultPieDataset pieDataSet, String issueStatus) {
+    private static void singleProductPieChart(
+            HashMap<Issue, Integer> hashMapData, Product product, DefaultPieDataset pieDataSet, String issueStatus
+    ) {
         for (Map.Entry<Issue, Integer> entry : hashMapData.entrySet()) {
             String issue = entry.getKey().getIssue();
             Integer count = entry.getValue();
@@ -72,7 +75,9 @@ public class DataChart {
         }
     }
 
-    private static void totalFixedVsNewIssuesPieChart(int totalNewIssues, int totalFixedIssues, DefaultPieDataset pieDataSet) {
+    private static void totalFixedVsNewIssuesPieChart(
+            int totalNewIssues, int totalFixedIssues, DefaultPieDataset pieDataSet
+    ) {
         pieDataSet.setValue("Total Fixed Issues " + totalFixedIssues, totalFixedIssues);
         pieDataSet.setValue("Total New Issues " + totalNewIssues, totalNewIssues);
 
@@ -95,7 +100,9 @@ public class DataChart {
         }
     }
 
-    private static void singlePageFixedVsNewIssuesPieChart(int fixedIssues, int newIssues, Page page, DefaultPieDataset pieDataSet) {
+    private static void singlePageFixedVsNewIssuesPieChart(
+            int fixedIssues, int newIssues, Page page, DefaultPieDataset pieDataSet
+    ) {
         pieDataSet.setValue("Total Fixed Issues", fixedIssues);
         pieDataSet.setValue("Total New Issues", newIssues);
 
@@ -153,7 +160,9 @@ public class DataChart {
         }
     }
 
-    public static void productSeverityComparisonGraph(HashMap<String, Integer> product1SeverityMap, HashMap<String, Integer> product2SeverityMap, String severityLevel){
+    public static void productSeverityComparisonGraph(
+            HashMap<String, Integer> product1SeverityMap, HashMap<String, Integer> product2SeverityMap, String severityLevel
+    ){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Map.Entry<String, Integer> entry : product2SeverityMap.entrySet()) {
             String product2Name = entry.getKey();
@@ -250,7 +259,9 @@ public class DataChart {
         singlePagePieChart(fixedIssuesData, page, pieDataSet, "New_Issues");
     }
 
-    public static void totalFixedVsNewIssues(HashMap<String, HashMap<Issue, Integer>> fixedIssuesData, HashMap<String, HashMap<Issue, Integer>> newIssuesData) {
+    public static void totalFixedVsNewIssues(
+            HashMap<String, HashMap<Issue, Integer>> fixedIssuesData, HashMap<String, HashMap<Issue, Integer>> newIssuesData
+    ) {
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
         int totalFixedIssues = 0;
         int totalNewIssues = 0;
@@ -269,7 +280,9 @@ public class DataChart {
         totalFixedVsNewIssuesPieChart(totalFixedIssues, totalNewIssues, pieDataSet);
     }
 
-    public static void singlePageFixedVsNewIssues(HashMap<Issue, Integer> fixedIssuesData, HashMap<Issue, Integer> newIssuesData, Page page) {
+    public static void singlePageFixedVsNewIssues(
+            HashMap<Issue, Integer> fixedIssuesData, HashMap<Issue, Integer> newIssuesData, Page page
+    ) {
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
         singlePageFixedVsNewIssuesPieChart(fixedIssuesData.size(), newIssuesData.size(), page, pieDataSet);
     }

@@ -43,7 +43,7 @@ public class ProductHandler {
         String productName = row.getCell(headers.indexOf("Product")).getStringCellValue();
 
         if (findProduct(productName) == null) {
-            return new Product(row.getCell(headers.indexOf("Product")).getStringCellValue(), newPage);
+            return new Product(productName, newPage);
         } else {
             findProduct(productName).addPage(newPage);
             return null;

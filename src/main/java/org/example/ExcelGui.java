@@ -25,14 +25,12 @@ public class ExcelGui extends JFrame {
 
     public ExcelGui(String title) {
         super(title);
-        this.importFile1 = importFile1;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(panelMain);
         this.pack();
         importFile1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ///insert code to import file 1
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
                 fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
@@ -47,7 +45,6 @@ public class ExcelGui extends JFrame {
         importFile2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ///insert code to import file 2
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
                 fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
@@ -76,7 +73,6 @@ public class ExcelGui extends JFrame {
                 }
                 productHandler1 = new ProductHandler(mySheet1);
                 productHandler2 = new ProductHandler(mySheet2);
-                //insert code to run program, i.e. when run program is pressed it will run this code which can call whichever method...
             }
         });
         productIssuesButton.addActionListener(new ActionListener() {
@@ -88,8 +84,12 @@ public class ExcelGui extends JFrame {
         totalFixedVsNewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<String, HashMap<Issue, Integer>> totalFixedIssues = DataVisualisation.totalFixedIssues(productHandler1, productHandler2);
-                HashMap<String, HashMap<Issue, Integer>> totalNewIssues = DataVisualisation.totalNewIssues(productHandler1, productHandler2);
+                HashMap<String, HashMap<Issue, Integer>> totalFixedIssues = DataVisualisation.totalFixedIssues(
+                        productHandler1, productHandler2
+                );
+                HashMap<String, HashMap<Issue, Integer>> totalNewIssues = DataVisualisation.totalNewIssues(
+                        productHandler1, productHandler2
+                );
                 DataChart.totalFixedVsNewIssues(totalFixedIssues, totalNewIssues);
             }
         });
@@ -97,8 +97,12 @@ public class ExcelGui extends JFrame {
         productIssueSeverityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<String, Integer> product1SeverityMap = DataVisualisation.productSpecificSeverityCounter(productHandler1, "critical");
-                HashMap<String, Integer> product2SeverityMap = DataVisualisation.productSpecificSeverityCounter(productHandler2, "critical");
+                HashMap<String, Integer> product1SeverityMap = DataVisualisation.productSpecificSeverityCounter(
+                        productHandler1, "critical"
+                );
+                HashMap<String, Integer> product2SeverityMap = DataVisualisation.productSpecificSeverityCounter(
+                        productHandler2, "critical"
+                );
                 DataChart.productSeverityComparisonGraph(product1SeverityMap, product2SeverityMap, "critical");
             }
         });
